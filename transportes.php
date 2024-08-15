@@ -3,6 +3,11 @@
         private $capacidade;
         private $passagensVendidas;
 
+        public function __construct($capacidade) {
+            $this->capacidade = $capacidade;
+            $this->passagensVendidas = 0;
+        }
+
         public function getCapacidade()
         {
                 return $this->capacidade;
@@ -39,8 +44,7 @@
         }
     }
 
-    $onibus = new Veiculo();
-    $onibus->setCapacidade(50);
+    $onibus = new Veiculo(readline("Qual a capacidade do veículo: \n"));
 
     while (true) {
         $entrada = readline("Digite o número de passagens que deseja comprar (ou 0 para sair): ");
