@@ -39,28 +39,32 @@
 
                 return $this;
         }
+
+        public function __toString()
+        {
+            return "Nome: " . $this->nome . " | Endereço: " . $this->endereco . " | Quantidade de Alunos: " . $this->qtd_alunos . "\n";
+        }
     }
 
-    $escola1 = new Escola();
-    $escola1->setNome(readline("Digite o nome da escola 1: "))
-            ->setEndereco(readline("Digite o endereço da escola 1: "))
-            ->setQtdAlunos(readline("Digite a quantidade de alunos da escola 1: "));
+    $escolas = [];
 
-    $escola2 = new Escola();
-    $escola2->setNome(readline("Digite o nome da escola 2: "))
-            ->setEndereco(readline("Digite o endereço da escola 2: "))
-            ->setQtdAlunos(readline("Digite a quantidade de alunos da escola 2: "));
+    for ($i = 1; $i <= 4; $i++) {
+        $escola = new Escola();
+        $escola->setNome(readline("Digite o nome da escola $i: "))
+            ->setEndereco(readline("Digite o endereço da escola $i: "))
+            ->setQtdAlunos(readline("Digite a quantidade de alunos da escola $i: "));
+        $escolas[] = $escola;
+    }
 
-    $escola3 = new Escola();
-    $escola3->setNome(readline("Digite o nome da escola 3: "))
-            ->setEndereco(readline("Digite o endereço da escola 3: "))
-            ->setQtdAlunos(readline("Digite a quantidade de alunos da escola 3: "));
+    foreach ($escolas as $index => $escola) {
+        echo "Dados da Escola " . ($index + 1) . ":\n";
+        echo $escola;
+    }
 
-    $escola4 = new Escola();
-    $escola4->setNome(readline("Digite o nome da escola 4: "))
-            ->setEndereco(readline("Digite o endereço da escola 4: "))
-            ->setQtdAlunos(readline("Digite a quantidade de alunos da escola 4: "));
-
-    $escolas = [$escola1, $escola2, $escola3, $escola4];
-
-    
+    $escolaComMaisAlunos = $escolas[0];
+    foreach ($escolas as $escola) {
+        if($escola->getQtdAlunos() > $escolaComMaisAlunos->getQtdAlunos()){
+            $escolaComMaisAlunos = $escola;
+        }
+    }
+    echo "Escola com mais alunos: " . $escolaComMaisAlunos;
