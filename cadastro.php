@@ -59,6 +59,7 @@
         echo "-----------MENU-----------\n";
         echo "1- Cadastrar\n";
         echo "2- Listar\n";
+        echo "3- Excluir\n";
         echo "0- SAIR\n";
         $opcao = readline("Escolha a opção: \n");
 
@@ -80,12 +81,32 @@
         break;
 
         case 2:
-        echo "Listando...\n\n";
+        echo "Listando...\n";
         foreach ($pessoas as $pessoa) {
-            echo $pessoa . "\n";
+            echo $pessoa;
         }
         break;
 
+        case 3:
+    
+            echo "Pessoas disponíveis:\n";
+            $i = 1;
+            foreach($pessoas as $i => $p) {
+                echo $i+1 . ": " . $p;
+                $i++;
+            }
+
+            $idx = readline("Informe qual pessoa deve ser excluída: ");
+            $idx--;
+
+            if($idx >= 0 && $idx < count($pessoas)){
+                array_splice($pessoas, $idx, 1);
+                echo "Pessoa excluída com sucesso!\n";
+            } else
+                echo "A pessoa escolhida não existe.\n";
+                
+            break;
+        
         default:
         echo "Opção INVÁLIDA!\n";
         }
